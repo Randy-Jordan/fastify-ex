@@ -1,7 +1,7 @@
 import fp from "fastify-plugin";
 import pg from 'pg'
 
-const { Pool, Client } = pg
+const { Pool } = pg
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -11,7 +11,7 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 
-async function database (fastify, opts){
+async function database (fastify){
   
   try { 
     const client = await pool.connect()
