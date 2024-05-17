@@ -1,9 +1,15 @@
 import fp from "fastify-plugin";
 import healthcheck from 'fastify-healthcheck';
+import Static from '@fastify/static'
+import path from 'path';
+import { dirname} from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 async function routes (fastify, opts) {
-  
-  // Register healthcheck plugin 
+// Register healthcheck plugin 
 fastify.register(healthcheck, {
   healthcheckUrl: '/health',
   // healthcheckUrlDisable: true,
@@ -12,7 +18,15 @@ fastify.register(healthcheck, {
   exposeUptime: true // enable, as a sample
 })
 
+await fastify.register(Static, {
+  root: path.join(__dirname, '..', 'static'),
+  prefix: '/' ,
+  wildcard: false,
+}) 
 
+fastify.get("/*", async function(request, reply) {
+  return {404:"Not Found"}
+})
 
 
 }

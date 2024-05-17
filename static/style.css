@@ -1,0 +1,127 @@
+:root {
+/* Font Sizes */
+    --fs-100: 0.625rem;	
+    --fs-200: 0.75rem;
+    --fs-300: 0.875rem;
+    --fs-400: 1rem;
+    --fs-500: 1.125rem;
+    --fs-600: 1.25rem;
+    --fs-700: 1.5rem;
+    --fs-800: 2.5rem;
+    --fs-900: 3.5rem;
+  
+    --fw-regular: 400;
+    --fw-semi-bold: 500;
+    --fw-bold: 700;
+  
+  /* Color variables */
+    --clr-bg-ltheme: #edebe9;
+    --clr-text-ltheme: #1b1b1b;
+    --clr-accent-ltheme: #ff8000;
+    --clr-primary-ltheme: #d4d4d2; 
+    --clr-secondary-ltheme: #babcbb;
+    --clr-link-ltheme: blue;
+    --clr-border-ltheme: blue;
+    
+    --clr-bg-dtheme: #121212;
+    --clr-text-dtheme: #edebe9;
+    --clr-accent-dtheme: #3a3b9c;
+    --clr-primary-dtheme: #1b1b1b; 
+    --clr-secondary-dtheme: #2d2d2d;
+    --clr-link-dtheme: blue;
+    --clr-border-dtheme: blue;
+   
+  /* General Colors  */
+    --black: #000; /* Black */
+    --white: #fff; /* White */
+    --clr-000: #636363;
+    --clr-100: #5A5A5A;
+    --clr-200: #515151;  
+    --clr-300: #484848; 
+    --clr-400: #3F3F3F; 
+    --clr-500: #363636; 
+    --clr-600: #2D2D2D; 
+    --clr-700: #242424; 
+    --clr-800: #1B1B1B; 
+    --clr-900: #121212; 
+    
+    /* Semantic Colors */
+    --clr-success: #118c11; 
+    --clr-info: #17a2b8; 
+    --clr-warning: #ff8000; 
+    --clr-danger: #d00000; 
+}
+
+/* CSS Resets */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margins. */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Make images easiser to work with. */
+img,picture,svg, video {
+display: block;
+max-width: 100%;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol, ul, menu {
+    list-style: none;
+}
+
+/* Form elements inherit font styles. */
+input, textarea, button, select {
+    font: inherit;
+}
+
+/* Motion Reducted Media Query */
+@media screen and
+  (prefers-reduced-motion: reduce), 
+  (update: slow) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Screen reader friendly hidden. */
+.visually-hidden:not(:focus):not(:active) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+/* Body and core Themes */
+
+body{
+  display: grid;
+  min-height: 100vh;
+  line-height: 1.5rem; 
+  background-color: var(--clr-bg-ltheme);
+  color: var(--clr-text-ltheme);
+}
+
+@media (prefers-color-scheme: dark) {
+  body{
+    background-color: var(--clr-bg-dtheme);
+    color: var(--clr-text-dtheme);
+  }
+}
+
