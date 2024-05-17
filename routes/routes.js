@@ -24,8 +24,9 @@ await fastify.register(Static, {
   wildcard: false,
 }) 
 
-fastify.get("/*", async function(request, reply) {
-  return {404:"Not Found"}
+fastify.get("/*",{onRequest: [fastify.authenticate]},
+  async function(request, reply) {
+    return {404:"Not Found"}
 })
 
 
