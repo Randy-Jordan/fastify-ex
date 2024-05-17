@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-
+// Setting up the autoloader for plugins and routes. 
 export default async function (fastify, opts) {
     
 // Require all the plugins that we'll need in our application.    
