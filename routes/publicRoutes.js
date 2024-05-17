@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-async function routes (fastify, opts) {
+async function publicRoutes (fastify, opts) {
 // Register healthcheck plugin 
 fastify.register(healthcheck, {
   healthcheckUrl: '/health',
@@ -24,18 +24,16 @@ await fastify.register(Static, {
   wildcard: false,
 }) 
 
-fastify.get("/*",{onRequest: [fastify.authenticate]},
-  async function(request, reply) {
-    return {404:"Not Found"}
+fastify.get("/*", async function(request, reply) {
+    return reply.send({404: "Not Found"})
 })
-
 
 }
 
-export default fp(routes, {
+export default fp(publicRoutes, {
     // Protip: if you name your plugins, the stack trace in case of errors
     //         will be easier to read and other plugins can declare their dependency
     //         on this one. `fastify-autoload` will take care of loading the plugins
     //         in the correct order.
-    name: 'routes'
+    name: 'publicRoutes'
 })
