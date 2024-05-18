@@ -1,10 +1,17 @@
 import fp from "fastify-plugin";
 import multipart from '@fastify/multipart'
 import formbody from '@fastify/formbody'
+import Static from '@fastify/static'
 import fs from 'fs'
 import util from 'util'
 import { pipeline } from 'stream'
-import crypto from 'crypto'
+import path from 'path';
+import { dirname} from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 
 const pump = util.promisify(pipeline)
 
@@ -15,11 +22,16 @@ fastify.register(formbody)
 
 fastify.post('/upload', async (request, reply) => { 
     const data = await request.file()
-
     await pump(data.file, fs.createWriteStream(`./uploads/${data.filename}`))
-    
     return {success : `${data.filename} uploaded sucessfully` }
   })
+
+  await fastify.register(Static, {
+    root: path.join(__dirname, '..', 'uploads'),
+    prefix: '/uploads' ,
+    wildcard: false,
+    decorateReply: false
+  }) 
 
 }
 
