@@ -2,9 +2,19 @@ import fp from "fastify-plugin";
 
 async function privateRoutes (fastify, opts) {
  
-fastify.get("/@/me",{onRequest: [fastify.authenticate]},
+fastify.get("/@/me",{onRequest: [fastify.isAuthenticated]},
   async function(request, reply) {
     return request.user
+})
+
+fastify.get("/@/admin",{onRequest: [ fastify.isAuthenticated, fastify.isAuthorized(['admin']) ] },
+  async function(request, reply) {
+    return request.user.roles
+})
+
+fastify.get("/@/user",{onRequest: [ fastify.isAuthenticated, fastify.isAuthorized(['user']) ] },
+  async function(request, reply) {
+    return request.user.roles
 })
 
 

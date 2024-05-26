@@ -16,7 +16,9 @@ fastify.post('/signin', async (request, reply) => {
           if (successResult === true){
               const token = await reply.jwtSign({
               name: result.rows[0].uname,
-              session: result.rows[0].session_uuid
+              session: result.rows[0].session_uuid,
+              roles: ['admin']
+
             })
             reply.setCookie('accessToken', token, {
               domain: 'localhost',
